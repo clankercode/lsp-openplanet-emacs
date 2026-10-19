@@ -99,6 +99,15 @@ session directory and temporary `XDG_CONFIG_HOME`; it trusts only that fixture
 for Flymake and disables the inherited C compiler backend in the test buffer. It neither installs packages
 nor edits personal configuration. The protocol trace defaults to
 `/tmp/openplanet-lsp-mode-events.log`; set `OPENPLANET_LSP_EVENTS` to change it.
+Native CI for revision `05012af29b7aeb56452baf0a2eaffd0fb1d636c3`:
+**all three matrix jobs PASS**, including the two lsp-mode API tests and the
+live transport test on Emacs **29.4**, **30.2**, and **snapshot 32.0.50**, all
+with lsp-mode **20261009.1332** and server **0.8.0**. The source/manifest
+repairs and CAPF assertions passed in each job. See the
+[check run](https://github.com/clankercode/lsp-openplanet-emacs/actions/runs/39217411255)
+and [checked CI step output](evidence/lsp-mode-ci.log). Pages also deployed
+successfully for that revision.
+
 CI now installs the optional client into a runner-temporary package directory
 and runs both API and live tests on each existing Emacs matrix entry.
 

@@ -1,4 +1,4 @@
-;;; install.el --- Isolated package installation smoke test -*- lexical-binding: t; -*-
+;;; install.el --- Install smoke test -*- lexical-binding: t; no-byte-compile: t; -*-
 ;; SPDX-License-Identifier: Unlicense OR CC0-1.0
 (require 'package)
 (require 'ert)

@@ -1,0 +1,28 @@
+../../../../tmp/eglot.el: Warning: ‘when-let’ is an obsolete macro (as of 31.1); use ‘when-let*’ or ‘and-let*’ instead.
+../../../../tmp/eglot.el: Warning: ‘when-let’ is an obsolete macro (as of 31.1); use ‘when-let*’ or ‘and-let*’ instead.
+../../../../tmp/eglot.el: Warning: ‘when-let’ is an obsolete macro (as of 31.1); use ‘when-let*’ or ‘and-let*’ instead.
+../../../../tmp/eglot.el: Warning: ‘when-let’ is an obsolete macro (as of 31.1); use ‘when-let*’ or ‘and-let*’ instead.
+../../../../tmp/eglot.el: Warning: ‘when-let’ is an obsolete macro (as of 31.1); use ‘when-let*’ or ‘and-let*’ instead.
+../../../../tmp/eglot.el: Warning: ‘when-let’ is an obsolete macro (as of 31.1); use ‘when-let*’ or ‘and-let*’ instead.
+../../../../tmp/eglot.el: Warning: ‘if-let’ is an obsolete macro (as of 31.1); use ‘if-let*’ instead.
+../../../../tmp/eglot.el: Warning: ‘when-let’ is an obsolete macro (as of 31.1); use ‘when-let*’ or ‘and-let*’ instead.
+../../../../tmp/eglot.el: Warning: ‘when-let’ is an obsolete macro (as of 31.1); use ‘when-let*’ or ‘and-let*’ instead.
+Running 9 tests (2026-10-19 18:28:30+1100, selector ‘t’)
+   passed  1/9  openplanet-commands-reject-unrelated-buffers (0.000238 sec)
+   passed  2/9  openplanet-eglot29-separates-language-ids (0.000066 sec)
+   passed  3/9  openplanet-project-markers-and-nearest-root (0.111428 sec)
+   passed  4/9  openplanet-project-single-file-fallback (0.005540 sec)
+   passed  5/9  openplanet-rejects-remote-before-looking-up-executable (0.000381 sec)
+   passed  6/9  openplanet-safe-executable-resolution (0.005034 sec)
+   passed  7/9  openplanet-selective-manifest-association (0.043820 sec)
+   passed  8/9  openplanet-setup-is-idempotent-and-leaves-toml-alone (0.000451 sec)
+Indenting region...
+Indenting region... done
+Indenting region...
+Indenting region... done
+Indenting region...
+Indenting region... done
+   passed  9/9  openplanet-source-association-and-editing (0.073024 sec)
+
+Ran 9 tests, 9 results as expected, 0 unexpected (2026-10-19 18:28:30+1100, 0.243010 sec)
+

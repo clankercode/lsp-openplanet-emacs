@@ -1,4 +1,4 @@
-;;; lsp-mode-test.el --- Tests against real lsp-mode API -*- lexical-binding: t; -*-
+;;; lsp-mode-test.el --- API tests -*- lexical-binding: t; no-byte-compile: t; -*-
 ;; SPDX-License-Identifier: Unlicense OR CC0-1.0
 (require 'package)
 (when (getenv "OPENPLANET_PACKAGE_DIR")

@@ -1,0 +1,35 @@
+Running 1 tests (2026-10-19 18:29:07+1100, selector ‘openplanet-eglot29-separates-language-ids’)
+Test openplanet-eglot29-separates-language-ids backtrace:
+  ert-fail(((should (= 2 (length eglot-server-programs))) :form (= 2 1
+  (if (unwind-protect (setq value-138 (apply fn-136 args-137)) (setq f
+  (let (form-description-140) (if (unwind-protect (setq value-138 (app
+  (let ((value-138 'ert-form-evaluation-aborted-139)) (let (form-descr
+  (let* ((fn-136 #'=) (args-137 (condition-case err (list 2 (length eg
+  (progn (fset 'eglot--language-ids nil) (openplanet--register-eglot) 
+  (unwind-protect (progn (fset 'eglot--language-ids nil) (openplanet--
+  (let* ((old (symbol-function 'eglot--language-ids))) (unwind-protect
+  (let ((eglot-server-programs nil)) (let* ((old (symbol-function 'egl
+  #f(lambda () [t] (let ((eglot-server-programs nil)) (let* ((old ...)
+  #f(compiled-function () #<bytecode 0x8bc631c89d5a60a>)()
+  handler-bind-1(#f(compiled-function () #<bytecode 0x8bc631c89d5a60a>
+  ert--run-test-internal(#s(ert--test-execution-info :test #s(ert-test
+  ert-run-test(#s(ert-test :name openplanet-eglot29-separates-language
+  ert-run-or-rerun-test(#s(ert--stats :selector openplanet-eglot29-sep
+  ert-run-tests(openplanet-eglot29-separates-language-ids #f(compiled-
+  ert-run-tests-batch(openplanet-eglot29-separates-language-ids)
+  ert-run-tests-batch-and-exit(openplanet-eglot29-separates-language-i
+  eval((ert-run-tests-batch-and-exit 'openplanet-eglot29-separates-lan
+  command-line-1(("-L" "/tmp/openplanet-emacs-red" "-l" "test/openplan
+  command-line()
+  normal-top-level()
+Test openplanet-eglot29-separates-language-ids condition:
+    (ert-test-failed
+     ((should (= 2 (length eglot-server-programs))) :form (= 2 1) :value
+      nil))
+   FAILED  1/1  openplanet-eglot29-separates-language-ids (0.000162 sec) at test/openplanet-test.el:114
+
+Ran 1 tests, 0 results as expected, 1 unexpected (2026-10-19 18:29:07+1100, 0.397162 sec)
+
+1 unexpected results:
+   FAILED  openplanet-eglot29-separates-language-ids
+

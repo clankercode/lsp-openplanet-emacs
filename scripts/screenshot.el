@@ -1,4 +1,4 @@
-;;; screenshot.el --- Real Eglot diagnostic session -*- lexical-binding: t; -*-
+;;; screenshot.el --- Real GUI capture -*- lexical-binding: t; no-byte-compile: t; -*-
 ;; SPDX-License-Identifier: Unlicense OR CC0-1.0
 (require 'openplanet)
 (require 'eglot)

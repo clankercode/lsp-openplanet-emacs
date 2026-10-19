@@ -1,4 +1,4 @@
-;;; integration.el --- Real Eglot/server smoke test -*- lexical-binding: t; -*-
+;;; integration.el --- Eglot smoke test -*- lexical-binding: t; no-byte-compile: t; -*-
 ;; SPDX-License-Identifier: Unlicense OR CC0-1.0
 (require 'openplanet)
 (require 'eglot)

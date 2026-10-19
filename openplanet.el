@@ -120,12 +120,14 @@ use DIRECTORY as a single-file project.  Do not affect other editing modes."
   (when (and (derived-mode-p 'openplanet-angelscript-mode 'openplanet-info-mode)
              (not (file-remote-p directory)))
     (cons 'openplanet
-          (or (locate-dominating-file
-               directory
-               (lambda (dir)
-                 (or (file-exists-p (expand-file-name "info.toml" dir))
-                     (file-exists-p (expand-file-name ".openplanet-lsp.toml" dir)))))
-              (file-name-as-directory (expand-file-name directory))))))
+          (file-name-as-directory
+           (expand-file-name
+            (or (locate-dominating-file
+                 directory
+                 (lambda (dir)
+                   (or (file-exists-p (expand-file-name "info.toml" dir))
+                       (file-exists-p (expand-file-name ".openplanet-lsp.toml" dir)))))
+                directory))))))
 
 (cl-defmethod project-root ((project (head openplanet)))
   "Return the root of an Openplanet PROJECT."

@@ -1,20 +1,21 @@
 /tmp/openplanet-emacs -Q --batch -L . --eval '(setq byte-compile-error-on-warn t)' -f batch-byte-compile openplanet.el
 /tmp/openplanet-emacs -Q --batch -L . -l test/openplanet-test.el -f ert-run-tests-batch-and-exit
-Running 8 tests (2026-10-19 18:25:05+1100, selector ‘t’)
-   passed  1/8  openplanet-commands-reject-unrelated-buffers (0.000116 sec)
-   passed  2/8  openplanet-project-markers-and-nearest-root (0.416836 sec)
-   passed  3/8  openplanet-project-single-file-fallback (0.000877 sec)
-   passed  4/8  openplanet-rejects-remote-before-looking-up-executable (0.000110 sec)
-   passed  5/8  openplanet-safe-executable-resolution (0.028227 sec)
-   passed  6/8  openplanet-selective-manifest-association (0.008409 sec)
-   passed  7/8  openplanet-setup-is-idempotent-and-leaves-toml-alone (0.000072 sec)
+Running 9 tests (2026-10-19 18:28:27+1100, selector ‘t’)
+   passed  1/9  openplanet-commands-reject-unrelated-buffers (0.000153 sec)
+   passed  2/9  openplanet-eglot29-separates-language-ids (0.000041 sec)
+   passed  3/9  openplanet-project-markers-and-nearest-root (0.444749 sec)
+   passed  4/9  openplanet-project-single-file-fallback (0.004769 sec)
+   passed  5/9  openplanet-rejects-remote-before-looking-up-executable (0.000265 sec)
+   passed  6/9  openplanet-safe-executable-resolution (0.009404 sec)
+   passed  7/9  openplanet-selective-manifest-association (0.018100 sec)
+   passed  8/9  openplanet-setup-is-idempotent-and-leaves-toml-alone (0.000177 sec)
 Indenting region...
 Indenting region... done
 Indenting region...
 Indenting region... done
 Indenting region...
 Indenting region... done
-   passed  8/8  openplanet-source-association-and-editing (0.006145 sec)
+   passed  9/9  openplanet-source-association-and-editing (0.017115 sec)
 
-Ran 8 tests, 8 results as expected, 0 unexpected (2026-10-19 18:25:05+1100, 0.461198 sec)
+Ran 9 tests, 9 results as expected, 0 unexpected (2026-10-19 18:28:28+1100, 0.495720 sec)
 

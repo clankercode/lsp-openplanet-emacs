@@ -1,4 +1,4 @@
-;;; openplanet-test.el --- Openplanet unit tests -*- lexical-binding: t; -*-
+;;; openplanet-test.el --- Unit tests -*- lexical-binding: t; no-byte-compile: t; -*-
 ;; SPDX-License-Identifier: Unlicense OR CC0-1.0
 (require 'ert)
 (require 'openplanet)
@@ -91,6 +91,14 @@
           (openplanet-angelscript-mode)
           (should (equal (project-root (openplanet--project-find dir)) dir)))
       (delete-directory dir t))))
+
+(ert-deftest openplanet-project-expands-abbreviated-roots ()
+  (with-temp-buffer
+    (openplanet-angelscript-mode)
+    (cl-letf (((symbol-function 'locate-dominating-file)
+               (lambda (&rest _) "~/openplanet-plugin/")))
+      (should (equal (project-root (openplanet--project-find default-directory))
+                     (expand-file-name "~/openplanet-plugin/"))))))
 
 (ert-deftest openplanet-setup-is-idempotent-and-leaves-toml-alone ()
   (let ((eglot-server-programs (copy-tree eglot-server-programs))

@@ -34,10 +34,14 @@ OPENPLANET_PACKAGE_DIR=/tmp/openplanet-emacs-packages \
 Results:
 
 - Byte compilation with warnings treated as errors: **PASS**.
-- Eight ERT tests: **PASS**, including source association/indentation, manifest
+- Nine ERT tests: **PASS**, including source association/indentation, manifest
   opt-in/opt-out and negative names, executable spaces/invalid paths/no fallback,
   risky-local-variable metadata, remote refusal, nearest roots, fallback root,
   idempotent registration, TOML coexistence, and non-Openplanet command refusal.
+- Emacs 29 compatibility regression: the new language-ID test **fails against
+  the previous implementation** and passes after separate source/manifest
+  registrations are used for old Eglot. All nine tests also pass with the
+  actual upstream Emacs 29.4 `eglot.el` loaded in the Emacs 31.1 runtime.
 - `package-install-file`, generated autoloads, `.as` association, Eglot setup:
   **PASS** in an empty temporary package directory.
 - Two tests against actual installed lsp-mode: **PASS**. Checked registration,
@@ -87,6 +91,10 @@ the primary undefined-identifier diagnostic is fully visible.
 - Local runtime tests cover Linux x86_64 with Emacs 31.1. Windows, macOS,
   terminal-only Emacs, Emacs 29/30, and live lsp-mode transport were not run
   locally. Public CI separately checks Emacs 29.4, 30.2, and snapshot.
+- A live attempt to load old Emacs 29 Eglot in Emacs 31 reached an incompatible
+  EIEIO slot error (`unbound-slot ... managed-buffers`) and was stopped. This is
+  not counted as native Emacs 29 integration verification. Native versions are
+  tested by CI; the local older-source run covers only the nine unit tests.
 - Screenshot and language tests do not run the example inside Trackmania or
   Openplanet. The installed server detects the host's game type information;
   no fixture type database is substituted for a production database.

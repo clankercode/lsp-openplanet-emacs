@@ -1,9 +1,9 @@
 /tmp/openplanet-emacs -Q --batch -L . -l test/integration.el
-[eglot] Connected! Server ‘EGLOT (openplanet-eglot-VkIcUf/(openplanet-angelscript-mode openplanet-info-mode))’ now managing ‘(openplanet-angelscript-mode openplanet-info-mode)’ buffers in project ‘openplanet-eglot-VkIcUf’.
+[eglot] Connected! Server ‘EGLOT (openplanet-eglot-LnlT0M/(openplanet-angelscript-mode openplanet-info-mode))’ now managing ‘(openplanet-angelscript-mode openplanet-info-mode)’ buffers in project ‘openplanet-eglot-LnlT0M’.
 
-[eglot] Asking EGLOT (openplanet-eglot-VkIcUf/(openplanet-angelscript-mode openplanet-info-mode)) politely to terminate
-[jsonrpc] (warning) Sentinel for EGLOT (openplanet-eglot-VkIcUf/(openplanet-angelscript-mode openplanet-info-mode)) still hasn't run, deleting it!
-Warning (jsonrpc): Sentinel for EGLOT (openplanet-eglot-VkIcUf/(openplanet-angelscript-mode openplanet-info-mode)) still hasn't run, deleting it!
+[eglot] Asking EGLOT (openplanet-eglot-LnlT0M/(openplanet-angelscript-mode openplanet-info-mode)) politely to terminate
+[jsonrpc] (warning) Sentinel for EGLOT (openplanet-eglot-LnlT0M/(openplanet-angelscript-mode openplanet-info-mode)) still hasn't run, deleting it!
+Warning (jsonrpc): Sentinel for EGLOT (openplanet-eglot-LnlT0M/(openplanet-angelscript-mode openplanet-info-mode)) still hasn't run, deleting it!
 [jsonrpc] Server exited with status 9
 ANGELSCRIPT DIAGNOSTICS: ("openplanet-lsp [unused-declaration]: a function `Greeting` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment)" "openplanet-lsp: undefined identifier `MissingName`" "openplanet-lsp [unused-declaration]: a function `Complete` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment)" "openplanet-lsp: expected Semi, found RBrace")
 CAPF COMPLETIONS: ("Greeting" "GetCmdBufferCore")

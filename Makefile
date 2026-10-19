@@ -1,6 +1,6 @@
 EMACS ?= emacs
 
-.PHONY: test compile check integration lsp-test
+.PHONY: test compile check integration lsp-test install-test
 test:
 	$(EMACS) -Q --batch -L . -l test/openplanet-test.el -f ert-run-tests-batch-and-exit
 
@@ -14,3 +14,6 @@ integration:
 
 lsp-test:
 	$(EMACS) -Q --batch -L . -l test/lsp-mode-test.el -f ert-run-tests-batch-and-exit
+
+install-test:
+	$(EMACS) -Q --batch -l test/install.el

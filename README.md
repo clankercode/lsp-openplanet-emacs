@@ -129,8 +129,9 @@ no example type database is installed by this package. See the
   Emacs may inherit a different PATH from your terminal; set the absolute option.
 - **No diagnostics:** run `M-x openplanet-eglot`, then check `M-x eglot-events-buffer`
   and `M-x flymake-show-buffer-diagnostics`. With lsp-mode use `M-x lsp-describe-session`.
-- **Wrong root:** ensure `openplanet-setup` ran and `M-x project-current` resolves
-  the plugin marker. Reconnect Eglot after changing the project layout.
+- **Wrong root:** ensure `openplanet-setup` ran and evaluate
+  `(project-root (project-current))` with `M-:` to inspect the plugin root.
+  Reconnect Eglot after changing the project layout.
 - **Manifest opens as ordinary TOML:** enable manifest support before visiting it,
   then revert/revisit the buffer or select `openplanet-info-mode`.
 - **Types/completions missing:** check server type DB detection and game target.

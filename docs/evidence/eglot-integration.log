@@ -1,0 +1,19 @@
+/tmp/openplanet-emacs -Q --batch -L . -l test/integration.el
+[eglot] Connected! Server ‘EGLOT (openplanet-eglot-VkIcUf/(openplanet-angelscript-mode openplanet-info-mode))’ now managing ‘(openplanet-angelscript-mode openplanet-info-mode)’ buffers in project ‘openplanet-eglot-VkIcUf’.
+
+[eglot] Asking EGLOT (openplanet-eglot-VkIcUf/(openplanet-angelscript-mode openplanet-info-mode)) politely to terminate
+[jsonrpc] (warning) Sentinel for EGLOT (openplanet-eglot-VkIcUf/(openplanet-angelscript-mode openplanet-info-mode)) still hasn't run, deleting it!
+Warning (jsonrpc): Sentinel for EGLOT (openplanet-eglot-VkIcUf/(openplanet-angelscript-mode openplanet-info-mode)) still hasn't run, deleting it!
+[jsonrpc] Server exited with status 9
+ANGELSCRIPT DIAGNOSTICS: ("openplanet-lsp [unused-declaration]: a function `Greeting` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment)" "openplanet-lsp: undefined identifier `MissingName`" "openplanet-lsp [unused-declaration]: a function `Complete` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment)" "openplanet-lsp: expected Semi, found RBrace")
+CAPF COMPLETIONS: ("Greeting" "GetCmdBufferCore")
+HOVER: (:contents (:kind "markdown" :value "```angelscript
+string Greeting(const string &in name)
+```"))
+TOML DIAGNOSTICS: ("openplanet-lsp [manifest]: TOML parse error: TOML parse error at line 7, column 11
+  |
+7 | timeout = \"not-a-number\"
+  |           ^^^^^^^^^^^^^^
+invalid type: string \"not-a-number\", expected u64
+")
+PASS: Emacs 31.1, Eglot bundled, command ("/home/xertrov/.local/bin/openplanet-lsp" "--lsp")

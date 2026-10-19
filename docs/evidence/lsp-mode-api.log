@@ -1,0 +1,7 @@
+/tmp/openplanet-emacs -Q --batch -L . -l test/lsp-mode-test.el -f ert-run-tests-batch-and-exit
+Running 2 tests (2026-10-19 18:26:13+1100, selector ‘t’)
+   passed  1/2  openplanet-real-lsp-mode-command-is-dynamic (0.021001 sec)
+   passed  2/2  openplanet-real-lsp-mode-registration (0.002563 sec)
+
+Ran 2 tests, 2 results as expected, 0 unexpected (2026-10-19 18:26:13+1100, 0.024446 sec)
+

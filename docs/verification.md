@@ -40,7 +40,7 @@ Results:
   idempotent registration, TOML coexistence, and non-Openplanet command refusal.
 - Emacs 29 compatibility regression: the new language-ID test **fails against
   the previous implementation** and passes after separate source/manifest
-  registrations are used for old Eglot. All nine tests also pass with the
+  registrations are used for old Eglot. All ten tests also pass with the
   actual upstream Emacs 29.4 `eglot.el` loaded in the Emacs 31.1 runtime.
   A tenth regression verifies absolute roots when Emacs abbreviates paths
   under the home directory; its red test and corrected result are preserved.
@@ -60,13 +60,17 @@ Results:
   **`initializationOptions: {}`**, preserving server configuration precedence.
 - package-lint and checkdoc: **PASS**, no diagnostics for `openplanet.el`.
 
-Native GitHub CI for revision `9202f1a`:
-[Check run](https://github.com/clankercode/lsp-openplanet-emacs/actions/runs/39216534761).
-Emacs 29.4 and snapshot passed all ten unit tests, byte compilation, isolated
-package installation, and actual Eglot/server integration. Emacs 30.2 initially
-rejected Flymake on untrusted temporary files. The test now dynamically trusts
-only its own generated fixture directory; product code does not change trust.
-The follow-up matrix result is recorded below after completion.
+Native GitHub CI for revision `ff5af39`: **all three matrix jobs PASS**.
+[Check run](https://github.com/clankercode/lsp-openplanet-emacs/actions/runs/39216767438).
+Emacs **29.4**, **30.2**, and **snapshot** passed all ten unit tests, byte
+compilation, isolated package installation, and actual Eglot/server integration.
+Emacs 30.2 initially rejected Flymake on untrusted temporary files. The test
+now dynamically trusts only its own generated fixture directory; product code
+does not change trust.
+
+Documentation is published at https://clankercode.github.io/lsp-openplanet-emacs/
+and was fetched successfully over HTTPS. Repository description and all six
+requested topics are configured. Package version is `0.1.0`.
 
 Read-only independent review initially found Emacs 29's single-language-ID
 behavior and old lookup result shape. Both were fixed; the second review

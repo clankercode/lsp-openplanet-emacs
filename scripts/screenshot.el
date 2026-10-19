@@ -3,6 +3,7 @@
 (require 'openplanet)
 (require 'eglot)
 (require 'flymake)
+(defvar trusted-content)
 (setq inhibit-startup-screen t initial-scratch-message nil
       make-backup-files nil auto-save-default nil
       eglot-sync-connect 15 eglot-autoshutdown t)
@@ -16,6 +17,8 @@
 (setq frame-title-format "GNU Emacs — Openplanet / Eglot")
 (openplanet-setup)
 (let* ((dir (getenv "OPENPLANET_CAPTURE_DIR"))
+       (trusted-content (list (abbreviate-file-name
+                              (file-name-as-directory dir))))
        (source (expand-file-name "Main.as" dir)))
   (find-file source)
   (goto-char (point-max))

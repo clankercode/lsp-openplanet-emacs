@@ -17,7 +17,7 @@
        (eglot-sync-connect 15)
        (eglot-connect-timeout 20)
        (eglot-autoshutdown t)
-       (eglot-events-buffer-size 200000)
+       (eglot-events-buffer-config '(:size 200000 :format full))
        source manifest server)
   (unwind-protect
       (progn
@@ -32,6 +32,7 @@
           (call-interactively #'eglot)
           (setq server (eglot-current-server))
           (should server)
+          (flymake-start)
           (should (equal (project-root (project-current)) default-directory))
           (openplanet-test-wait
            (lambda () (flymake-diagnostics)) 30 "AngelScript diagnostics")
@@ -43,9 +44,11 @@
           (let* ((capf (eglot-completion-at-point))
                  (completions (all-completions "Gre" (nth 2 capf))))
             (should (member "Greeting" completions))
-            (princ (format "CAPF COMPLETIONS: %S\n" completions)))
+            (princ (format "CAPF COMPLETIONS: %S\n"
+                           (mapcar #'substring-no-properties completions))))
           (goto-char (point-min))
           (search-forward "Greeting")
+          (backward-char 2)
           (let ((hover (jsonrpc-request server :textDocument/hover
                                        (eglot--TextDocumentPositionParams))))
             (should hover)
@@ -58,17 +61,25 @@
           (goto-char (point-max))
           (insert "\n[script]\ntimeout = \"not-a-number\"\n")
           (save-buffer)
+          (flymake-start)
           (openplanet-test-wait (lambda () (flymake-diagnostics)) 30 "manifest diagnostics")
           (princ (format "TOML DIAGNOSTICS: %S\n"
                          (mapcar #'flymake-diagnostic-text (flymake-diagnostics)))))
         (when-let* ((events (jsonrpc-events-buffer server)))
           (with-current-buffer events
+            (let ((coding-system-for-write 'no-conversion))
             (write-region (point-min) (point-max)
-                          (or (getenv "OPENPLANET_EVENTS") "/tmp/openplanet-eglot-events.log") nil 'silent)))
+                          (or (getenv "OPENPLANET_EVENTS") "/tmp/openplanet-eglot-events.log") nil 'silent))))
         (princ (format "PASS: Emacs %s, Eglot %s, command %S\n"
                        emacs-version (or (bound-and-true-p eglot-version) "bundled")
                        (openplanet--command))))
-    (when server (ignore-errors (eglot-shutdown server)))
+    (when server
+      (when-let* ((events (jsonrpc-events-buffer server)))
+        (with-current-buffer events
+          (let ((coding-system-for-write 'no-conversion))
+          (write-region (point-min) (point-max)
+                        (or (getenv "OPENPLANET_EVENTS") "/tmp/openplanet-eglot-events.log") nil 'silent))))
+      (ignore-errors (eglot-shutdown server)))
     (dolist (buf (list source manifest))
       (when (buffer-live-p buf) (kill-buffer buf)))
     (delete-directory dir t)))

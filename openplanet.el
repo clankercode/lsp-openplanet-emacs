@@ -149,12 +149,16 @@ use DIRECTORY as a single-file project.  Do not affect other editing modes."
 ;;;###autoload
 (defun openplanet-setup ()
   "Register project discovery, Eglot and lsp-mode integrations.
-This neither loads an LSP client nor starts a server.  It is safe to call
-repeatedly.  Choose Eglot OR lsp-mode for a buffer, not both."
+This loads built-in Eglot but never starts a server.  If lsp-mode is already
+loaded, also register its client.  Otherwise use `openplanet-lsp' or call
+this again after loading lsp-mode.  It is safe to call repeatedly.
+Choose Eglot OR lsp-mode for a buffer, not both."
   (interactive)
   (add-hook 'project-find-functions #'openplanet--project-find)
-  (with-eval-after-load 'eglot (openplanet--register-eglot))
-  (with-eval-after-load 'lsp-mode (openplanet--register-lsp-mode)))
+  (require 'eglot)
+  (openplanet--register-eglot)
+  (when (featurep 'lsp-mode)
+    (openplanet--register-lsp-mode)))
 
 ;;;###autoload
 (defun openplanet-eglot ()

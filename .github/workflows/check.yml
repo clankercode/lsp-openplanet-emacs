@@ -1,0 +1,27 @@
+name: Check
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  emacs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        emacs_version: ['29.4', '30.2', 'snapshot']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: purcell/setup-emacs@master
+        with:
+          version: ${{ matrix.emacs_version }}
+      - run: make check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --global openplanet-lsp@0.8.0
+      - run: make integration
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eglot-events-${{ matrix.emacs_version }}
+          path: /tmp/openplanet-eglot-events.log

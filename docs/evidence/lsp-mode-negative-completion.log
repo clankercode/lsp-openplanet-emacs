@@ -1,0 +1,49 @@
+Intentional negative control: only the generated source function declaration was renamed from Greeting to Welcome in a temporary copy of test/lsp-integration.el; the expected Greeting completion was unchanged. Expected exit status: 1.
+
+Running 1 tests (2026-10-19 18:39:11+1100, selector ‘t’)
+LSP :: Connected to [openplanet:21/starting /tmp/openplanet-lsp-mode-fr7GRq].
+LSP :: Unable to autoconfigure company-mode.
+LSP :: Unable to autoconfigure company-mode.
+LSP :: openplanet:21 initialized successfully in folders: (/tmp/openplanet-lsp-mode-fr7GRq)
+
+LSP :: Stopping openplanet:21
+
+LSP :: openplanet has exited (killed)
+LSP :: Workspace openplanet:21 shutdown.
+Test openplanet-live-lsp-mode backtrace:
+  ert-fail(((should (member "Greeting" completions)) :form (member "Gr
+  (if (unwind-protect (setq value-29 (apply fn-27 args-28)) (setq form
+  (let (form-description-31) (if (unwind-protect (setq value-29 (apply
+  (let ((value-29 'ert-form-evaluation-aborted-30)) (let (form-descrip
+  (let* ((fn-27 #'member) (args-28 (condition-case err (list "Greeting
+  (let* ((capf (lsp-completion-at-point)) (completions (mapcar #'subst
+  (save-current-buffer (set-buffer source) (let* ((fn-0 #'eq) (args-1 
+  (progn (setenv "XDG_CONFIG_HOME" (expand-file-name "config" dir)) (w
+  (unwind-protect (progn (setenv "XDG_CONFIG_HOME" (expand-file-name "
+  (let* ((dir (make-temp-file "openplanet-lsp-mode-" t)) (default-dire
+  #f(lambda () [t] (let* ((dir (make-temp-file "openplanet-lsp-mode-" 
+  #f(compiled-function () #<bytecode -0xfc6e87124c5b200>)()
+  handler-bind-1(#f(compiled-function () #<bytecode -0xfc6e87124c5b200
+  ert--run-test-internal(#s(ert--test-execution-info :test ... :result
+  ert-run-test(#s(ert-test :name openplanet-live-lsp-mode :documentati
+  ert-run-or-rerun-test(#s(ert--stats :selector t :tests ... :test-map
+  ert-run-tests(t #f(compiled-function (event-type &rest event-args) #
+  ert-run-tests-batch(nil)
+  ert-run-tests-batch-and-exit()
+  command-line-1(("-L" "." "-l" "/tmp/openplanet-lsp-negative.el" "-f"
+  command-line()
+  normal-top-level()
+Test openplanet-live-lsp-mode condition:
+    (ert-test-failed
+     ((should (member "Greeting" completions)) :form
+      (member "Greeting" nil) :value nil))
+   FAILED  1/1  openplanet-live-lsp-mode (0.336338 sec) at ../../../../tmp/openplanet-lsp-negative.el:26
+
+Ran 1 tests, 0 results as expected, 1 unexpected (2026-10-19 18:39:12+1100, 0.419811 sec)
+
+1 unexpected results:
+   FAILED  openplanet-live-lsp-mode
+
+INITIALIZED: root=/tmp/openplanet-lsp-mode-fr7GRq, process=("/home/xertrov/.local/bin/openplanet-lsp" "--lsp")
+ANGELSCRIPT DIAGNOSTICS: ("a function `Welcome` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment) [unused-declaration]" "undefined identifier `MissingName`" "a function `Complete` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment) [unused-declaration]" "expected Semi, found RBrace")
+CLEANUP: server still alive after lsp-mode shutdown; terminating test-owned process

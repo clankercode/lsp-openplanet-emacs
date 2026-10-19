@@ -1,0 +1,91 @@
+/tmp/openplanet-emacs -Q --batch -L . --eval '(setq byte-compile-error-on-warn t)' -f batch-byte-compile openplanet.el
+/tmp/openplanet-emacs -Q --batch -L . -l test/openplanet-test.el -f ert-run-tests-batch-and-exit
+Running 10 tests (2026-10-19 18:39:02+1100, selector ‘t’)
+   passed   1/10  openplanet-commands-reject-unrelated-buffers (0.000217 sec)
+   passed   2/10  openplanet-eglot29-separates-language-ids (0.000038 sec)
+   passed   3/10  openplanet-project-expands-abbreviated-roots (0.006874 sec)
+   passed   4/10  openplanet-project-markers-and-nearest-root (0.478821 sec)
+   passed   5/10  openplanet-project-single-file-fallback (0.000877 sec)
+   passed   6/10  openplanet-rejects-remote-before-looking-up-executable (0.000111 sec)
+   passed   7/10  openplanet-safe-executable-resolution (0.009381 sec)
+   passed   8/10  openplanet-selective-manifest-association (0.007285 sec)
+   passed   9/10  openplanet-setup-is-idempotent-and-leaves-toml-alone (0.000107 sec)
+Indenting region...
+Indenting region... done
+Indenting region...
+Indenting region... done
+Indenting region...
+Indenting region... done
+   passed  10/10  openplanet-source-association-and-editing (0.093277 sec)
+
+Ran 10 tests, 10 results as expected, 0 unexpected (2026-10-19 18:39:03+1100, 0.597673 sec)
+
+/tmp/openplanet-emacs -Q --batch -l test/install.el
+  INFO     Scraping 1 files for loaddefs...
+  INFO     Scraping 1 files for loaddefs...done
+  GEN      openplanet-autoloads.el
+Checking /tmp/openplanet-installed-VpkYbK/openplanet-0.1.0...
+Compiling /tmp/openplanet-installed-VpkYbK/openplanet-0.1.0/openplanet-autoloads.el...
+Compiling /tmp/openplanet-installed-VpkYbK/openplanet-0.1.0/openplanet-pkg.el...
+Compiling /tmp/openplanet-installed-VpkYbK/openplanet-0.1.0/openplanet.el...
+Done (Total of 1 file compiled, 2 skipped)
+Setting ‘package-selected-packages’ temporarily since "emacs -q" would overwrite customizations
+PASS: package-install-file and generated autoloads (31.1)
+/tmp/openplanet-emacs -Q --batch -L . -l test/integration.el
+[eglot] Connected! Server ‘EGLOT (openplanet-eglot-1bNumm/(openplanet-angelscript-mode openplanet-info-mode))’ now managing ‘(openplanet-angelscript-mode openplanet-info-mode)’ buffers in project ‘openplanet-eglot-1bNumm’.
+
+[eglot] Asking EGLOT (openplanet-eglot-1bNumm/(openplanet-angelscript-mode openplanet-info-mode)) politely to terminate
+[jsonrpc] (warning) Sentinel for EGLOT (openplanet-eglot-1bNumm/(openplanet-angelscript-mode openplanet-info-mode)) still hasn't run, deleting it!
+Warning (jsonrpc): Sentinel for EGLOT (openplanet-eglot-1bNumm/(openplanet-angelscript-mode openplanet-info-mode)) still hasn't run, deleting it!
+[jsonrpc] Server exited with status 9
+ANGELSCRIPT DIAGNOSTICS: ("openplanet-lsp [unused-declaration]: a function `Greeting` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment)" "openplanet-lsp: undefined identifier `MissingName`" "openplanet-lsp [unused-declaration]: a function `Complete` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment)" "openplanet-lsp: expected Semi, found RBrace")
+CAPF COMPLETIONS: ("Greeting" "GetCmdBufferCore")
+HOVER: (:contents (:kind "markdown" :value "```angelscript
+string Greeting(const string &in name)
+```"))
+TOML DIAGNOSTICS: ("openplanet-lsp [manifest]: TOML parse error: TOML parse error at line 7, column 11
+  |
+7 | timeout = \"not-a-number\"
+  |           ^^^^^^^^^^^^^^
+invalid type: string \"not-a-number\", expected u64
+")
+PASS: Emacs 31.1, Eglot bundled, command ("/home/xertrov/.local/bin/openplanet-lsp" "--lsp")
+/tmp/openplanet-emacs -Q --batch -L . -l test/lsp-mode-test.el -f ert-run-tests-batch-and-exit
+Running 2 tests (2026-10-19 18:39:04+1100, selector ‘t’)
+   passed  1/2  openplanet-real-lsp-mode-command-is-dynamic (0.013024 sec)
+   passed  2/2  openplanet-real-lsp-mode-registration (0.001537 sec)
+
+Ran 2 tests, 2 results as expected, 0 unexpected (2026-10-19 18:39:04+1100, 0.014781 sec)
+
+/tmp/openplanet-emacs -Q --batch -L . -l test/lsp-integration.el -f ert-run-tests-batch-and-exit
+Running 1 tests (2026-10-19 18:39:05+1100, selector ‘t’)
+LSP :: Connected to [openplanet:1475121/starting /tmp/openplanet-lsp-mode-0Yu06h].
+LSP :: Unable to autoconfigure company-mode.
+LSP :: Unable to autoconfigure company-mode.
+LSP :: openplanet:1475121 initialized successfully in folders: (/tmp/openplanet-lsp-mode-0Yu06h)
+
+LSP :: Unable to autoconfigure company-mode.
+LSP :: Unable to autoconfigure company-mode.
+LSP :: Connected to [openplanet:1475121 /tmp/openplanet-lsp-mode-0Yu06h].
+
+LSP :: Stopping openplanet:1475121
+
+LSP :: openplanet has exited (killed)
+LSP :: Workspace openplanet:1475121 shutdown.
+   passed  1/1  openplanet-live-lsp-mode (0.492281 sec)
+
+Ran 1 tests, 1 results as expected, 0 unexpected (2026-10-19 18:39:05+1100, 0.492471 sec)
+
+INITIALIZED: root=/tmp/openplanet-lsp-mode-0Yu06h, process=("/home/xertrov/.local/bin/openplanet-lsp" "--lsp")
+ANGELSCRIPT DIAGNOSTICS: ("a function `Greeting` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment) [unused-declaration]" "undefined identifier `MissingName`" "a function `Complete` is never used (suppress with a leading `_` or a trailing `// lsp: ignore unused` comment) [unused-declaration]" "expected Semi, found RBrace")
+LSP CAPF COMPLETIONS: ("Greeting")
+SOURCE REPAIR: MissingName diagnostic cleared
+TOML DIAGNOSTICS (same workspace): ("TOML parse error: TOML parse error at line 7, column 11
+  |
+7 | timeout = \"not-a-number\"
+  |           ^^^^^^^^^^^^^^
+invalid type: string \"not-a-number\", expected u64
+ [manifest]")
+MANIFEST REPAIR: timeout diagnostic cleared
+PASS: Emacs 31.1; lsp-mode lsp-mode 20261009.1332, Emacs 31.1, gnu/linux; live initialization, source diagnostics, CAPF, manifest routing, repairs; no initializationOptions
+CLEANUP: server still alive after lsp-mode shutdown; terminating test-owned process

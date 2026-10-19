@@ -22,8 +22,23 @@ jobs:
           node-version: '22'
       - run: npm install --global openplanet-lsp@0.8.0
       - run: make integration
+      - name: Test optional lsp-mode client
+        env:
+          OPENPLANET_PACKAGE_DIR: ${{ runner.temp }}/openplanet-packages
+        run: |
+          emacs -Q --batch --eval '(progn
+            (require (quote package))
+            (setq package-user-dir (getenv "OPENPLANET_PACKAGE_DIR")
+                  package-archives (quote (("gnu" . "https://elpa.gnu.org/packages/")
+                                           ("melpa" . "https://melpa.org/packages/"))))
+            (package-initialize)
+            (package-refresh-contents)
+            (package-install (quote lsp-mode)))'
+          make lsp-test lsp-integration
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: eglot-events-${{ matrix.emacs_version }}
-          path: /tmp/openplanet-eglot-events.log
+          path: |
+            /tmp/openplanet-eglot-events.log
+            /tmp/openplanet-lsp-mode-events.log

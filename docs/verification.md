@@ -23,7 +23,7 @@ make EMACS=/tmp/openplanet-emacs check
 make EMACS=/tmp/openplanet-emacs install-test
 make EMACS=/tmp/openplanet-emacs integration
 OPENPLANET_PACKAGE_DIR=/tmp/openplanet-emacs-packages \
-  make EMACS=/tmp/openplanet-emacs lsp-test
+  make EMACS=/tmp/openplanet-emacs lsp-test lsp-integration
 /tmp/openplanet-emacs --batch -Q \
   -L /tmp/openplanet-emacs-packages/package-lint-20260903.2119 \
   -l package-lint -f package-lint-batch-and-exit openplanet.el
@@ -51,8 +51,22 @@ Results:
   files skipped as intended; load, setup, and `.as` association passed.
 - Two tests against actual installed lsp-mode: **PASS**. Checked registration,
   language IDs, other TOML/C++/text exclusion, dynamic executable checking,
-  and no initialization overrides. These are API tests, not a live lsp-mode
-  transport session.
+  and no initialization overrides. These remain API tests; the separate live
+  test below verifies the real transport.
+- Live lsp-mode/server test: **PASS**, through `M-x openplanet-lsp`'s actual
+  command implementation and the installed lsp-mode package. Verified a live
+  initialized process running `openplanet-lsp --lsp` with the temporary plugin
+  root; Flymake's undefined-identifier diagnostic for `MissingName`; CAPF
+  completion containing `Greeting`; and the same workspace handling opt-in
+  `info.toml` with TOML syntax and an invalid `timeout` diagnostic. Source and
+  manifest diagnostics cleared after repairs. The source repair additionally
+  waits for a new unused-local-variable diagnostic, so a cleared UI alone
+  cannot satisfy it. The protocol trace confirms `angelscript` and `toml`
+  didOpen language IDs and **omitted `initializationOptions`**, preserving
+  server configuration precedence. A temporary negative-control copy renamed
+  the source function to `Welcome`: initialization and diagnostics still ran,
+  but the `Greeting` CAPF assertion failed as expected. No product defect was
+  found and `openplanet.el` was unchanged.
 - Live Eglot/server test: **PASS**. Actual initialized server, `didOpen` with
   `angelscript`, Flymake undefined-identifier diagnostic, Eglot CAPF completion
   containing `Greeting`, hover signature, same-server manifest attachment using
@@ -77,6 +91,25 @@ behavior and old lookup result shape. Both were fixed; the second review
 returned PASS on `80c82c1`. It also independently inspected the screenshot
 and returned PASS. The later absolute-root fix was driven by native CI and
 has a red/green regression. No broad source or upstream server changes occurred.
+
+The live lsp-mode test is reproducible with `make lsp-integration` and needs
+installed lsp-mode plus the server on `exec-path`. `OPENPLANET_PACKAGE_DIR` selects
+the package directory. It uses `-Q`, a generated plugin, and a temporary Emacs
+session directory and temporary `XDG_CONFIG_HOME`; it trusts only that fixture
+for Flymake and disables the inherited C compiler backend in the test buffer. It neither installs packages
+nor edits personal configuration. The protocol trace defaults to
+`/tmp/openplanet-lsp-mode-events.log`; set `OPENPLANET_LSP_EVENTS` to change it.
+CI now installs the optional client into a runner-temporary package directory
+and runs both API and live tests on each existing Emacs matrix entry.
+
+Checked evidence: [`lsp-mode-integration.log`](evidence/lsp-mode-integration.log),
+[`lsp-mode-events.log`](evidence/lsp-mode-events.log), and the intentional
+[`lsp-mode-negative-completion.log`](evidence/lsp-mode-negative-completion.log).
+The trace is the actual test traffic, including the deliberately invalid source.
+The company-mode warnings in the test output mean that optional popup frontend
+is absent; the actual CAPF assertion passes without it. Cleanup requests
+lsp-mode shutdown, then terminates its own still-running server process. This
+is **not** a successful graceful server shutdown.
 
 Captured logs are in [`evidence/`](evidence/). The live integration test deliberately
 introduces invalid source and a manifest `timeout` string to assert diagnostics.
@@ -112,8 +145,10 @@ the primary undefined-identifier diagnostic is fully visible.
 ## Limits
 
 - Local runtime tests cover Linux x86_64 with Emacs 31.1. Windows, macOS,
-  terminal-only Emacs, and live lsp-mode transport were not run. Native Emacs
-  29/30 coverage is supplied by CI rather than the local machine.
+  and terminal-only interactive Emacs were not run. Local live lsp-mode transport
+  is verified with the version above; other lsp-mode versions are not a
+  compatibility claim. Native Emacs 29/30 coverage is supplied by CI rather than
+  the local machine.
 - A live attempt to load old Emacs 29 Eglot in Emacs 31 reached an incompatible
   EIEIO slot error (`unbound-slot ... managed-buffers`) and was stopped. This is
   not counted as native Emacs 29 integration verification. Native versions are

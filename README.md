@@ -148,12 +148,16 @@ no example type database is installed by this package. See the
 ```sh
 make check                  # byte compile with warnings fatal; focused ERT
 make integration            # real Eglot + installed server; fails if unavailable
-make lsp-test               # requires installed lsp-mode
+make lsp-test               # API checks; requires installed lsp-mode
+make lsp-integration        # real lsp-mode + installed server
 bash scripts/screenshot.sh  # real GUI; needs Xvfb, ImageMagick, GUI Emacs
 ```
 
 `EMACS=/path/to/emacs` selects another Emacs. `OPENPLANET_PACKAGE_DIR` selects
-an isolated lsp-mode package directory for `make lsp-test`.
+an isolated lsp-mode package directory for `make lsp-test lsp-integration`.
+The live test creates and removes a temporary plugin and Emacs session, checks
+Flymake diagnostics and CAPF completion, and saves the protocol trace to
+`/tmp/openplanet-lsp-mode-events.log` (override with `OPENPLANET_LSP_EVENTS`).
 [Verification](docs/verification.md) distinguishes tested behavior from limits.
 
 ## License

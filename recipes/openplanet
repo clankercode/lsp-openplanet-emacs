@@ -1,0 +1,2 @@
+(openplanet :fetcher github :repo "clankercode/lsp-openplanet-emacs"
+            :files ("openplanet.el" "UNLICENSE" "LICENSE-CC0"))

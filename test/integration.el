@@ -18,7 +18,7 @@
        (eglot-connect-timeout 20)
        (eglot-autoshutdown t)
        (eglot-events-buffer-config '(:size 200000 :format full))
-       source manifest server)
+       source manifest server manifest-server)
   (unwind-protect
       (progn
         (write-region "[meta]\nname = \"Eglot test\"\nauthor = \"clankercode\"\nversion = \"0.1.0\"\n"
@@ -56,8 +56,12 @@
         (setq manifest (find-file-noselect (expand-file-name "info.toml" dir)))
         (with-current-buffer manifest
           (should (eq major-mode 'openplanet-info-mode))
+          (unless (fboundp 'eglot--language-ids)
+            (call-interactively #'eglot))
           (openplanet-test-wait (lambda () (eglot-managed-p)) 10 "manifest management")
-          (should (eq server (eglot-current-server)))
+          (setq manifest-server (eglot-current-server))
+          (when (fboundp 'eglot--language-ids)
+            (should (eq server manifest-server)))
           (goto-char (point-max))
           (insert "\n[script]\ntimeout = \"not-a-number\"\n")
           (save-buffer)
@@ -73,6 +77,8 @@
         (princ (format "PASS: Emacs %s, Eglot %s, command %S\n"
                        emacs-version (or (bound-and-true-p eglot-version) "bundled")
                        (openplanet--command))))
+    (when (and manifest-server (not (eq server manifest-server)))
+      (ignore-errors (eglot-shutdown manifest-server)))
     (when server
       (when-let* ((events (jsonrpc-events-buffer server)))
         (with-current-buffer events

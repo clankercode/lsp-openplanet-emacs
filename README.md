@@ -97,6 +97,10 @@ configuration, or run `M-x openplanet-info-mode` manually. Disable future
 associations with `M-x openplanet-disable-manifests`. Existing buffers keep their
 mode until revisited or changed explicitly.
 
+Eglot bundled with Emacs 29 uses separate server connections for source and
+manifest buffers because it supports only one language ID per connection.
+Current Eglot (including Emacs 30+) shares one server for both modes.
+
 Project discovery uses the nearest `info.toml` or `.openplanet-lsp.toml` marker,
 before Git's outer repository root. For an isolated source file, its directory
 is the root. Put `.openplanet-lsp.toml` in a workspace parent when appropriate;

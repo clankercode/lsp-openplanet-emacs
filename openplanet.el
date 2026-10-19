@@ -133,7 +133,15 @@ use DIRECTORY as a single-file project.  Do not affect other editing modes."
 
 (defun openplanet--register-eglot ()
   "Register Openplanet's modes with Eglot idempotently."
-  (add-to-list 'eglot-server-programs openplanet--eglot-entry))
+  ;; Eglot bundled with Emacs 29 has one language ID per server.  Separate
+  ;; entries keep manifests as TOML instead of sending AngelScript's ID.
+  (if (fboundp 'eglot--language-ids)
+      (add-to-list 'eglot-server-programs openplanet--eglot-entry)
+    (dolist (entry '(((openplanet-angelscript-mode :language-id "angelscript")
+                     . openplanet--eglot-contact)
+                    ((openplanet-info-mode :language-id "toml")
+                     . openplanet--eglot-contact)))
+      (add-to-list 'eglot-server-programs entry))))
 
 (defun openplanet--register-lsp-mode ()
   "Register Openplanet's modes with lsp-mode."

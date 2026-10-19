@@ -34,7 +34,7 @@ OPENPLANET_PACKAGE_DIR=/tmp/openplanet-emacs-packages \
 Results:
 
 - Byte compilation with warnings treated as errors: **PASS**.
-- Nine ERT tests: **PASS**, including source association/indentation, manifest
+- Ten ERT tests: **PASS**, including source association/indentation, manifest
   opt-in/opt-out and negative names, executable spaces/invalid paths/no fallback,
   risky-local-variable metadata, remote refusal, nearest roots, fallback root,
   idempotent registration, TOML coexistence, and non-Openplanet command refusal.
@@ -42,8 +42,13 @@ Results:
   the previous implementation** and passes after separate source/manifest
   registrations are used for old Eglot. All nine tests also pass with the
   actual upstream Emacs 29.4 `eglot.el` loaded in the Emacs 31.1 runtime.
+  A tenth regression verifies absolute roots when Emacs abbreviates paths
+  under the home directory; its red test and corrected result are preserved.
 - `package-install-file`, generated autoloads, `.as` association, Eglot setup:
   **PASS** in an empty temporary package directory.
+- Public `package-vc-install` with the documented recipe: **PASS**, using
+  published revision `9202f1a`. One package file compiled and eight developer
+  files skipped as intended; load, setup, and `.as` association passed.
 - Two tests against actual installed lsp-mode: **PASS**. Checked registration,
   language IDs, other TOML/C++/text exclusion, dynamic executable checking,
   and no initialization overrides. These are API tests, not a live lsp-mode
@@ -54,6 +59,20 @@ Results:
   `toml`, and invalid manifest value diagnostics after save. Initialize emitted
   **`initializationOptions: {}`**, preserving server configuration precedence.
 - package-lint and checkdoc: **PASS**, no diagnostics for `openplanet.el`.
+
+Native GitHub CI for revision `9202f1a`:
+[Check run](https://github.com/clankercode/lsp-openplanet-emacs/actions/runs/39216534761).
+Emacs 29.4 and snapshot passed all ten unit tests, byte compilation, isolated
+package installation, and actual Eglot/server integration. Emacs 30.2 initially
+rejected Flymake on untrusted temporary files. The test now dynamically trusts
+only its own generated fixture directory; product code does not change trust.
+The follow-up matrix result is recorded below after completion.
+
+Read-only independent review initially found Emacs 29's single-language-ID
+behavior and old lookup result shape. Both were fixed; the second review
+returned PASS on `80c82c1`. It also independently inspected the screenshot
+and returned PASS. The later absolute-root fix was driven by native CI and
+has a red/green regression. No broad source or upstream server changes occurred.
 
 Captured logs are in [`evidence/`](evidence/). The live integration test deliberately
 introduces invalid source and a manifest `timeout` string to assert diagnostics.
@@ -89,12 +108,12 @@ the primary undefined-identifier diagnostic is fully visible.
 ## Limits
 
 - Local runtime tests cover Linux x86_64 with Emacs 31.1. Windows, macOS,
-  terminal-only Emacs, Emacs 29/30, and live lsp-mode transport were not run
-  locally. Public CI separately checks Emacs 29.4, 30.2, and snapshot.
+  terminal-only Emacs, and live lsp-mode transport were not run. Native Emacs
+  29/30 coverage is supplied by CI rather than the local machine.
 - A live attempt to load old Emacs 29 Eglot in Emacs 31 reached an incompatible
   EIEIO slot error (`unbound-slot ... managed-buffers`) and was stopped. This is
   not counted as native Emacs 29 integration verification. Native versions are
-  tested by CI; the local older-source run covers only the nine unit tests.
+  tested by CI; the local older-source run covers only the ten unit tests.
 - Screenshot and language tests do not run the example inside Trackmania or
   Openplanet. The installed server detects the host's game type information;
   no fixture type database is substituted for a production database.

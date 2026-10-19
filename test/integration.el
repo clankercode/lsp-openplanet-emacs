@@ -4,6 +4,7 @@
 (require 'eglot)
 (require 'ert)
 (require 'flymake)
+(defvar trusted-content)
 
 (defun openplanet-test-wait (predicate seconds description)
   "Wait SECONDS for PREDICATE, otherwise error with DESCRIPTION."
@@ -14,6 +15,9 @@
 
 (let* ((dir (make-temp-file "openplanet-eglot-" t))
        (default-directory (file-name-as-directory dir))
+       ;; Emacs 30 requires explicit trust for Flymake.  Trust only the
+       ;; fixture directory this test just generated, for this dynamic scope.
+       (trusted-content (list (abbreviate-file-name default-directory)))
        (eglot-sync-connect 15)
        (eglot-connect-timeout 20)
        (eglot-autoshutdown t)

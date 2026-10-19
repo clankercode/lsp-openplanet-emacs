@@ -1,21 +1,22 @@
 /tmp/openplanet-emacs -Q --batch -L . --eval '(setq byte-compile-error-on-warn t)' -f batch-byte-compile openplanet.el
 /tmp/openplanet-emacs -Q --batch -L . -l test/openplanet-test.el -f ert-run-tests-batch-and-exit
-Running 9 tests (2026-10-19 18:28:27+1100, selector ‘t’)
-   passed  1/9  openplanet-commands-reject-unrelated-buffers (0.000153 sec)
-   passed  2/9  openplanet-eglot29-separates-language-ids (0.000041 sec)
-   passed  3/9  openplanet-project-markers-and-nearest-root (0.444749 sec)
-   passed  4/9  openplanet-project-single-file-fallback (0.004769 sec)
-   passed  5/9  openplanet-rejects-remote-before-looking-up-executable (0.000265 sec)
-   passed  6/9  openplanet-safe-executable-resolution (0.009404 sec)
-   passed  7/9  openplanet-selective-manifest-association (0.018100 sec)
-   passed  8/9  openplanet-setup-is-idempotent-and-leaves-toml-alone (0.000177 sec)
+Running 10 tests (2026-10-19 18:31:12+1100, selector ‘t’)
+   passed   1/10  openplanet-commands-reject-unrelated-buffers (0.000176 sec)
+   passed   2/10  openplanet-eglot29-separates-language-ids (0.000039 sec)
+   passed   3/10  openplanet-project-expands-abbreviated-roots (0.010764 sec)
+   passed   4/10  openplanet-project-markers-and-nearest-root (0.140216 sec)
+   passed   5/10  openplanet-project-single-file-fallback (0.001536 sec)
+   passed   6/10  openplanet-rejects-remote-before-looking-up-executable (0.000252 sec)
+   passed   7/10  openplanet-safe-executable-resolution (0.002076 sec)
+   passed   8/10  openplanet-selective-manifest-association (0.022693 sec)
+   passed   9/10  openplanet-setup-is-idempotent-and-leaves-toml-alone (0.000471 sec)
 Indenting region...
 Indenting region... done
 Indenting region...
 Indenting region... done
 Indenting region...
 Indenting region... done
-   passed  9/9  openplanet-source-association-and-editing (0.017115 sec)
+   passed  10/10  openplanet-source-association-and-editing (0.020875 sec)
 
-Ran 9 tests, 9 results as expected, 0 unexpected (2026-10-19 18:28:28+1100, 0.495720 sec)
+Ran 10 tests, 10 results as expected, 0 unexpected (2026-10-19 18:31:12+1100, 0.200255 sec)
 

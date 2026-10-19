@@ -1,0 +1,44 @@
+Running 1 tests (2026-10-19 18:30:58+1100, selector ‘openplanet-project-expands-abbreviated-roots’)
+Test openplanet-project-expands-abbreviated-roots backtrace:
+  ert-fail(((should (equal (project-root (openplanet--project-find def
+  (if (unwind-protect (setq value-103 (apply fn-101 args-102)) (setq f
+  (let (form-description-105) (if (unwind-protect (setq value-103 (app
+  (let ((value-103 'ert-form-evaluation-aborted-104)) (let (form-descr
+  (let* ((fn-101 #'equal) (args-102 (condition-case err (list (project
+  (progn (fset 'locate-dominating-file vnew) (let* ((fn-101 #'equal) (
+  (unwind-protect (progn (fset 'locate-dominating-file vnew) (let* ((f
+  (let* ((vnew #'(lambda (&rest _) "~/openplanet-plugin/")) (old (symb
+  (progn (openplanet-angelscript-mode) (let* ((vnew #'(lambda (&rest _
+  (unwind-protect (progn (openplanet-angelscript-mode) (let* ((vnew #'
+  (save-current-buffer (set-buffer temp-buffer) (unwind-protect (progn
+  (let ((temp-buffer (generate-new-buffer " *temp*" t))) (save-current
+  #f(lambda () [t] (let ((temp-buffer (generate-new-buffer " *temp*" t
+  #f(compiled-function () #<bytecode 0x172196ec605ddd8c>)()
+  handler-bind-1(#f(compiled-function () #<bytecode 0x172196ec605ddd8c
+  ert--run-test-internal(#s(ert--test-execution-info :test #s(ert-test
+  ert-run-test(#s(ert-test :name openplanet-project-expands-abbreviate
+  ert-run-or-rerun-test(#s(ert--stats :selector openplanet-project-exp
+  ert-run-tests(openplanet-project-expands-abbreviated-roots #f(compil
+  ert-run-tests-batch(openplanet-project-expands-abbreviated-roots)
+  ert-run-tests-batch-and-exit(openplanet-project-expands-abbreviated-
+  eval((ert-run-tests-batch-and-exit 'openplanet-project-expands-abbre
+  command-line-1(("-L" "." "-l" "test/openplanet-test.el" "--eval" "(e
+  command-line()
+  normal-top-level()
+Test openplanet-project-expands-abbreviated-roots condition:
+    (ert-test-failed
+     ((should
+       (equal (project-root ...) (expand-file-name "~/openplanet-plugin/")))
+      :form
+      (equal "~/openplanet-plugin/" "/home/xertrov/openplanet-plugin/")
+      :value nil :explanation
+      (arrays-of-different-length 20 32 "~/openplanet-plugin/"
+				  "/home/xertrov/openplanet-plugin/"
+				  first-mismatch-at 0)))
+   FAILED  1/1  openplanet-project-expands-abbreviated-roots (0.009185 sec) at test/openplanet-test.el:95
+
+Ran 1 tests, 0 results as expected, 1 unexpected (2026-10-19 18:30:58+1100, 0.069202 sec)
+
+1 unexpected results:
+   FAILED  openplanet-project-expands-abbreviated-roots
+

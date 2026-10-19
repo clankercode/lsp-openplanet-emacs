@@ -133,6 +133,8 @@ no example type database is installed by this package. See the
   Emacs may inherit a different PATH from your terminal; set the absolute option.
 - **No diagnostics:** run `M-x openplanet-eglot`, then check `M-x eglot-events-buffer`
   and `M-x flymake-show-buffer-diagnostics`. With lsp-mode use `M-x lsp-describe-session`.
+  If Emacs 30 reports “untrusted content,” review the project and add only its
+  directory to `trusted-content` using Customize; the package does not grant trust.
 - **Wrong root:** ensure `openplanet-setup` ran and evaluate
   `(project-root (project-current))` with `M-:` to inspect the plugin root.
   Reconnect Eglot after changing the project layout.
